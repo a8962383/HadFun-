@@ -1,0 +1,723 @@
+{
+    "?xml": {
+        "@version": "1.0"
+    },
+    "ArrayOfAnyType": {
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+        "anyType": [
+            {
+                "@xsi:type": "xsd:byte",
+                "#text": "53"
+            },
+            {
+                "@xsi:type": "xsd:string",
+                "#text": "Ver"
+            },
+            {
+                "@xsi:type": "xsd:short",
+                "#text": "231"
+            },
+            {
+                "@xsi:type": "xsd:string"
+            },
+            {
+                "@xsi:type": "ArrayOfAnyType",
+                "anyType": [
+                    {
+                        "@xsi:type": "ArrayOfAnyType",
+                        "anyType": {
+                            "@xsi:type": "xsd:string",
+                            "#text": "_ grp1 _"
+                        }
+                    },
+                    {
+                        "@xsi:type": "xsd:string",
+                        "#text": "10px"
+                    },
+                    {
+                        "@xsi:type": "xsd:string",
+                        "#text": "4px 414px 4px"
+                    }
+                ]
+            },
+            {
+                "@xsi:type": "xsd:string",
+                "#text": "Top left"
+            },
+            {
+                "@xsi:type": "ArrayOfAnyType",
+                "anyType": {
+                    "@xsi:type": "ArrayOfAnyType",
+                    "anyType": [
+                        {
+                            "@xsi:type": "xsd:byte",
+                            "#text": "51"
+                        },
+                        {
+                            "@xsi:type": "xsd:string"
+                        },
+                        {
+                            "@xsi:type": "xsd:string",
+                            "#text": "grp1"
+                        },
+                        {
+                            "@xsi:type": "ArrayOfAnyType",
+                            "anyType": [
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "_ grp1.c10111 grp1.c10111 grp1.c10111 _ grp1.c10112 grp1.c10112 _ grp1.c2687 grp1.c2687 _"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "_ _ grp1.labDate12 _ _ grp1.labDate23 _ _ grp1.labDate13 _ _"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "_ grp1.c10132 grp1.c10132 grp1.c10132 _ grp1.c10133 grp1.c10133 _ grp1.c10134 grp1.c10134 _"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "_ grp1.c2689 grp1.c2689 grp1.c2689 _ grp1.c2688 grp1.c2688 _ grp1.c2691 grp1.c2691 _"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "_ grp1.c2694 grp1.c2694 grp1.c2694 _ grp1.c2695 grp1.c2695 _ grp1.c2696 grp1.c2696 _"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "xsd:string",
+                                    "#text": "8px 24px 24px 24px 24px"
+                                },
+                                {
+                                    "@xsi:type": "xsd:string",
+                                    "#text": "4px 96px 42px 54px 8px 42px 54px 8px 42px 54px 10px"
+                                }
+                            ]
+                        },
+                        {
+                            "@xsi:type": "xsd:string",
+                            "#text": "Top left"
+                        },
+                        {
+                            "@xsi:type": "ArrayOfAnyType",
+                            "anyType": [
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "50"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Date 1-2"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.labDate12"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "50"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Date 2-3"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.labDate23"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "50"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Date 1-3"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.labDate13"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Date"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "10111"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c10111"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "10112"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c10112"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2687"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2687"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Interest"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "10132"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c10132"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "10133"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c10133"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "10134"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c10134"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Day count conv."
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2689"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2689"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2688"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2688"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2691"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2691"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Interest conv."
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2694"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2694"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2695"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2695"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@xsi:type": "ArrayOfAnyType",
+                                    "anyType": [
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "11"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "2696"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:short",
+                                            "#text": "266"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "1"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "96"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "20"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "grp1.c2696"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:byte",
+                                            "#text": "0"
+                                        },
+                                        {
+                                            "@xsi:type": "xsd:string",
+                                            "#text": "Top left"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
