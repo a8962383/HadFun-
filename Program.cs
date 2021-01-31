@@ -258,7 +258,6 @@ using Newtonsoft.Json.Schema;
 #endregion
 
 #region Hack into private variables
-
 var myInstance = new MyClass();
 var fieldInfo = typeof(MyClass).GetField("_encryptionSecret", BindingFlags.NonPublic | BindingFlags.Instance);
 var secret = fieldInfo.GetValue(myInstance);
