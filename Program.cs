@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -256,33 +257,22 @@ using Newtonsoft.Json.Schema;
 // }
 #endregion
 
-#region Hack private variables
-// var myInstance = new MyClass();
-// var fieldInfo = typeof(MyClass).GetField("answer", BindingFlags.NonPublic | BindingFlags.Instance);
-// var answer = fieldInfo.GetValue(myInstance);
-// Console.WriteLine(answer);
+#region Hack into private variables
 
+var myInstance = new MyClass();
+var fieldInfo = typeof(MyClass).GetField("_encryptionSecret", BindingFlags.NonPublic | BindingFlags.Instance);
+var secret = fieldInfo.GetValue(myInstance);
+foreach (var item in secret as IEnumerable)
+{
+    Console.WriteLine(item);
+}
+Console.ReadKey();
 
-// public class MyClass
-// {
-//     private int answer = 42;
-// }
+public class MyClass
+{
+    private byte[] _encryptionSecret = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
+}
 
 #endregion
- 
-try {
-    XDocument contacts = XDocument.Parse(
-        @"<Contacts>
-            <Contact>
-                <Name> Jim Wilson</Name>
-            </Contact>
-          </Contacts>");
 
-    Console.WriteLine(contacts);
-}
-catch (System.Xml.XmlException e)
-{
-    Console.WriteLine(e.Message);
-}
-
-Console.ReadKey();
+// Console.ReadKey();
