@@ -258,20 +258,57 @@ using Newtonsoft.Json.Schema;
 #endregion
 
 #region Hack into private variables
-var myInstance = new MyClass();
-var fieldInfo = typeof(MyClass).GetField("_secret", BindingFlags.NonPublic | BindingFlags.Instance);
-var secret = fieldInfo.GetValue(myInstance);
-foreach (var item in secret as IEnumerable)
-{
-    Console.WriteLine(item);
-}
-Console.ReadKey();
+// var myInstance = new MyClass();
+// var fieldInfo = typeof(MyClass).GetField("_secret", BindingFlags.NonPublic | BindingFlags.Instance);
+// var secret = fieldInfo.GetValue(myInstance);
+// foreach (var item in secret as IEnumerable)
+// {
+//     Console.WriteLine(item);
+// }
+// Console.ReadKey();
 
-public class MyClass
-{
-    private byte[] _secret = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
-}
+// public class MyClass
+// {
+//     private byte[] _secret = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
+// }
 
 #endregion
 
-// Console.ReadKey();
+
+#region string is reference type but it's immutable 
+
+// string str = "str";
+// string str1 = str + "_str1";
+// str = string.Empty;
+// Console.WriteLine(str1);
+
+// Test x = new Test() { name = "MDRN" };
+// Test y = x;
+// x.name = string.Empty;
+// Console.WriteLine("y.name: " + y.name);
+
+// Test1 xx = new Test1("MDRN");
+// Test1 yy = xx with {name = "NEWMDRN"}; 
+// Console.WriteLine("yy.name: " + yy.name);
+
+// int a = 5;
+// int b = a + 4;
+// a = 0;
+// Console.WriteLine(b);
+
+// public class Test
+// {
+//     public string name { get; set; }
+// }
+
+// public record Test1(string name);
+
+#endregion
+
+#region Current experiment
+
+Console.WriteLine("Goodbye world!!!");
+
+#endregion
+
+Console.ReadKey();
