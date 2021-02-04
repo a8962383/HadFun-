@@ -274,7 +274,6 @@ using Newtonsoft.Json.Schema;
 
 #endregion
 
-
 #region string is reference type but it's immutable 
 
 // string str = "str";
