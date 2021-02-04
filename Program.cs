@@ -305,7 +305,7 @@ using Newtonsoft.Json.Schema;
 
 #endregion
 
-#region Current experiment
+#region Goodbye world!!!
 
 Console.WriteLine("Goodbye world!!!");
 
