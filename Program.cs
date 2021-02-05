@@ -19,6 +19,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using ExtensionMethods;
 
 #region Proxy server
 // object[] inputArray = new object[10];
@@ -306,8 +307,29 @@ using Newtonsoft.Json.Schema;
 
 #region Goodbye world!!!
 
-Console.WriteLine("Goodbye world!!!");
+"aa".Dump();
 
 #endregion
 
 Console.ReadKey();
+
+#region Extension Methods
+namespace ExtensionMethods
+{
+    public static class MyExtensions
+    {
+        public static int WordCount(this String str)
+        {
+            return str.Split(new char[] { ' ', '.', '?' },
+                             StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+
+        public static void Dump<T>(this T obj, bool indent = false)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(obj, indent ? Newtonsoft.Json.Formatting.Indented : Newtonsoft.Json.Formatting.None,
+            new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+        }
+    }
+}
+
+#endregion
