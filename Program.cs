@@ -331,22 +331,19 @@ Console.ReadKey();
 
 void DummyButtonClickButton() => Console.Write("==>");
 
-async Task CallFacebookCodeAsync() => Console.WriteLine("FB Code has a content length of " + await GetContentLengthAsync());
-
-async Task<int> GetContentLengthAsync()
+async Task CallFacebookCodeAsync()
 {
     string content = string.Empty;
     try
     {
         content = await new HttpClient().GetStringAsync("https://engineering.fb.com/");
+        Console.WriteLine("FB Code has a content length of " + content.Length);
         asyncCallCounter++;
     }
     catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
     }
-
-    return content.Length;
 }
 
 #endregion
