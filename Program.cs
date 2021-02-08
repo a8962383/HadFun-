@@ -241,6 +241,7 @@ using System.Net.Http;
 #endregion
 
 #region Hack into private variables
+
 // var myInstance = new MyClass();
 // var fieldInfo = typeof(MyClass).GetField("_secret", BindingFlags.NonPublic | BindingFlags.Instance);
 // var secret = fieldInfo.GetValue(myInstance);
@@ -287,59 +288,66 @@ using System.Net.Http;
 
 #endregion
 
-#region Game of Parallelism
-int[] array = Enumerable.Range(0, short.MaxValue).ToArray();
+#region Game of Parallelism + Concurrency
+// int[] array = Enumerable.Range(0, short.MaxValue).ToArray();
 
-Console.WriteLine("Seq. sum: " + array.Sum());
-Console.WriteLine("Par. sum: " + array.AsParallel().Sum());
+// Console.WriteLine("Seq. sum: " + array.Sum());
+// Console.WriteLine("Par. sum: " + array.AsParallel().Sum());
 
-int m = 5000;
-var s1 = Stopwatch.StartNew();
-for (int i = 0; i < m; i++) array.Sum();
-s1.Stop();
+// int m = 5000;
+// var s1 = Stopwatch.StartNew();
+// for (int i = 0; i < m; i++) array.Sum();
+// s1.Stop();
 
-var s2 = Stopwatch.StartNew();
-for (int i = 0; i < m; i++) array.AsParallel().Sum();
-s2.Stop();
+// var s2 = Stopwatch.StartNew();
+// for (int i = 0; i < m; i++) array.AsParallel().Sum();
+// s2.Stop();
 
-Console.WriteLine("Seq. execution time: " + ((double)(s1.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
-Console.WriteLine("Par. execution time: " + ((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
+// Console.WriteLine("Seq. execution time: " + ((double)(s1.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
+// Console.WriteLine("Par. execution time: " + ((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
 #endregion
 
 #region Game of Concurrency
 
-// "Calling Google.".Dump();
-// "UI thread is free now...".Dump();
-// int uiCallCounter = 0;
-// Stopwatch watch = new Stopwatch();
-// watch.Start();
-// while (watch.ElapsedMilliseconds < 10001)
-// {
-//     Console.Write("==>");
-//     CallGoogleAsync();
-//     ++uiCallCounter;
-//     Thread.Sleep(200);
-// }
-// watch.Stop();
-// Console.WriteLine(Environment.NewLine + "Total call triggered => " + uiCallCounter + Environment.NewLine);
+"Calling Facebook Code.".Dump();
+"UI thread is free now...".Dump();
+int uiCallCounter = 0;
+int asyncCallCounter = 0;
+Stopwatch watch = new Stopwatch();
+watch.Start();
+
+while (watch.ElapsedMilliseconds < 5001)
+{
+    CallFacebookCodeAsync();
+    DummyButtonClickButton();
+    Thread.Sleep(100);
+    uiCallCounter++;
+}
+
+watch.Stop();
+Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
+Console.WriteLine("# of async calls => " + asyncCallCounter + Environment.NewLine);
 Console.ReadKey();
 
-// async Task CallGoogleAsync() => Console.WriteLine("Google has a content length of " + await GetContentLengthAsync());
+void DummyButtonClickButton() => Console.Write("==>");
 
-// async Task<int> GetContentLengthAsync()
-// {
-//     string content = string.Empty;
-//     try
-//     {
-//         content = await new HttpClient().GetStringAsync("https://www.google.com");
-//     }
-//     catch (Exception ex)
-//     {
-//         Console.WriteLine(ex.Message);
-//     }
+async Task CallFacebookCodeAsync() => Console.WriteLine("FB Code has a content length of " + await GetContentLengthAsync());
 
-//     return content.Length;
-// }
+async Task<int> GetContentLengthAsync()
+{
+    string content = string.Empty;
+    try
+    {
+        content = await new HttpClient().GetStringAsync("https://engineering.fb.com/");
+        asyncCallCounter++;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+
+    return content.Length;
+}
 
 #endregion
 
