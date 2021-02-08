@@ -318,7 +318,7 @@ watch.Start();
 
 while (watch.ElapsedMilliseconds < 5001)
 {
-    CallFacebookCodeAsync();
+    CallUriAsync("https://engineering.fb.com/");
     DummyButtonClickButton();
     Thread.Sleep(100);
     uiCallCounter++;
@@ -331,12 +331,12 @@ Console.ReadKey();
 
 void DummyButtonClickButton() => Console.Write("==>");
 
-async Task CallFacebookCodeAsync()
+async Task CallUriAsync(string uri)
 {
     string content = string.Empty;
     try
     {
-        content = await new HttpClient().GetStringAsync("https://engineering.fb.com/");
+        content = await new HttpClient().GetStringAsync(uri);
         Console.WriteLine("FB Code has a content length of " + content.Length);
         asyncCallCounter++;
     }
