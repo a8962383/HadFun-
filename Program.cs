@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using ExtensionMethods;
+using System.Net.Http;
 
 #region Proxy server
 // object[] inputArray = new object[10];
@@ -79,25 +80,6 @@ using ExtensionMethods;
 // Console.WriteLine(p1 == p2); //this is crazy
 // Console.WriteLine(p1 == p3); //this is crazy
 
-#endregion
-
-#region Game of thread
-// int[] array = Enumerable.Range(0, short.MaxValue).ToArray();
-
-// Console.WriteLine(array.Sum());
-// Console.WriteLine(array.AsParallel().Sum());
-
-// int m = 500000;
-// var s1 = Stopwatch.StartNew();
-// for (int i = 0; i < m; i++) array.Sum();
-// s1.Stop();
-
-// var s2 = Stopwatch.StartNew();
-// for (int i = 0; i < m; i++) array.AsParallel().Sum();
-// s2.Stop();
-
-// Console.WriteLine(((double)(s1.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
-// Console.WriteLine(((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
 #endregion
 
 #region Json Validation
@@ -305,20 +287,68 @@ using ExtensionMethods;
 
 #endregion
 
-#region Goodbye world!!!
+#region Game of Parallelism
+int[] array = Enumerable.Range(0, short.MaxValue).ToArray();
 
-"aa".Dump();
+Console.WriteLine("Seq. sum: " + array.Sum());
+Console.WriteLine("Par. sum: " + array.AsParallel().Sum());
 
+int m = 5000;
+var s1 = Stopwatch.StartNew();
+for (int i = 0; i < m; i++) array.Sum();
+s1.Stop();
+
+var s2 = Stopwatch.StartNew();
+for (int i = 0; i < m; i++) array.AsParallel().Sum();
+s2.Stop();
+
+Console.WriteLine("Seq. execution time: " + ((double)(s1.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
+Console.WriteLine("Par. execution time: " + ((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
 #endregion
 
+#region Game of Concurrency
+
+// "Calling Google.".Dump();
+// "UI thread is free now...".Dump();
+// int uiCallCounter = 0;
+// Stopwatch watch = new Stopwatch();
+// watch.Start();
+// while (watch.ElapsedMilliseconds < 10001)
+// {
+//     Console.Write("==>");
+//     CallGoogleAsync();
+//     ++uiCallCounter;
+//     Thread.Sleep(200);
+// }
+// watch.Stop();
+// Console.WriteLine(Environment.NewLine + "Total call triggered => " + uiCallCounter + Environment.NewLine);
 Console.ReadKey();
+
+// async Task CallGoogleAsync() => Console.WriteLine("Google has a content length of " + await GetContentLengthAsync());
+
+// async Task<int> GetContentLengthAsync()
+// {
+//     string content = string.Empty;
+//     try
+//     {
+//         content = await new HttpClient().GetStringAsync("https://www.google.com");
+//     }
+//     catch (Exception ex)
+//     {
+//         Console.WriteLine(ex.Message);
+//     }
+
+//     return content.Length;
+// }
+
+#endregion
 
 #region Extension Methods
 namespace ExtensionMethods
 {
     public static class MyExtensions
     {
-        public static int WordCount(this String str)
+        public static int WordCount(this string str)
         {
             return str.Split(new char[] { ' ', '.', '?' },
                              StringSplitOptions.RemoveEmptyEntries).Length;
