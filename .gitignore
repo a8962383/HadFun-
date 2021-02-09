@@ -27,3 +27,5 @@ obj/Debug/net5.0/Test.pdb
 obj/Debug/net5.0/ref/Test.dll
 .vscode/launch.json
 .vscode/tasks.json
+bin/Debug/net5.0/Test
+obj/Debug/net5.0/apphost
