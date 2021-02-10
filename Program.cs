@@ -309,42 +309,59 @@ using System.Net.Http;
 
 #region Game of Concurrency
 
-"Calling Facebook Code.".Dump();
-"UI thread is free now...".Dump();
-int uiCallCounter = 0;
-int asyncCallCounter = 0;
-Stopwatch watch = new Stopwatch();
-watch.Start();
+// "Calling Facebook Code.".Dump();
+// "UI thread is free now...".Dump();
+// int uiCallCounter = 0;
+// int asyncCallCounter = 0;
+// Stopwatch watch = new Stopwatch();
+// watch.Start();
 
-while (watch.ElapsedMilliseconds < 5001)
+// while (watch.ElapsedMilliseconds < 5001)
+// {
+//     CallUriAsync("https://engineering.fb.com/");
+//     DummyButtonClickButton();
+//     Thread.Sleep(100);
+//     uiCallCounter++;
+// }
+
+// watch.Stop();
+// Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
+// Console.WriteLine("# of async calls  => " + asyncCallCounter + Environment.NewLine);
+// Console.ReadKey();
+
+// void DummyButtonClickButton() => Console.Write("==>");
+
+// async Task CallUriAsync(string uri)
+// {
+//     string content = string.Empty;
+//     try
+//     {
+//         content = await new HttpClient().GetStringAsync(uri);
+//         Console.WriteLine("FB Code has a content length of " + content.Length);
+//         asyncCallCounter++;
+//     }
+//     catch (Exception ex)
+//     {
+//         Console.WriteLine(ex.Message);
+//     }
+// }
+
+#endregion
+
+#region Sleep sort
+
+var input = new[] { 1, 9, 2, 1, 3, 10, 83, 65, 23 };
+
+foreach (var n in input)
 {
-    CallUriAsync("https://engineering.fb.com/");
-    DummyButtonClickButton();
-    Thread.Sleep(100);
-    uiCallCounter++;
+    Task.Run(() =>
+    {
+        Thread.Sleep(n * 10);
+        Console.WriteLine(n);
+    });
 }
 
-watch.Stop();
-Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
-Console.WriteLine("# of async calls => " + asyncCallCounter + Environment.NewLine);
 Console.ReadKey();
-
-void DummyButtonClickButton() => Console.Write("==>");
-
-async Task CallUriAsync(string uri)
-{
-    string content = string.Empty;
-    try
-    {
-        content = await new HttpClient().GetStringAsync(uri);
-        Console.WriteLine("FB Code has a content length of " + content.Length);
-        asyncCallCounter++;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
 
 #endregion
 
