@@ -307,61 +307,90 @@ using System.Net.Http;
 // Console.WriteLine("Par. execution time: " + ((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
 #endregion
 
-#region Game of Concurrency
+#region Game of Concurrency with CancellationToken
 
-// "Calling Facebook Code.".Dump();
-// "UI thread is free now...".Dump();
-// int uiCallCounter = 0;
-// int asyncCallCounter = 0;
-// Stopwatch watch = new Stopwatch();
-// watch.Start();
+"Calling Facebook Code.".Dump();
+"UI thread is free now...".Dump();
+int uiCallCounter = 0;
+int asyncCallCounter = 0;
+var tokenSource = new CancellationTokenSource();
+var token = tokenSource.Token;
+Stopwatch watch = new Stopwatch();
+watch.Start();
 
-// while (watch.ElapsedMilliseconds < 5001)
-// {
-//     CallUriAsync("https://engineering.fb.com/");
-//     DummyButtonClickButton();
-//     Thread.Sleep(100);
-//     uiCallCounter++;
-// }
+try
+{
+    while (watch.ElapsedMilliseconds < 5001)
+    {
+        CallUriAsync("https://engineering.fb.com/", token);
+        DummyButtonClickButton();
+        Thread.Sleep(100);
+        uiCallCounter++;
 
-// watch.Stop();
-// Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
-// Console.WriteLine("# of async calls  => " + asyncCallCounter + Environment.NewLine);
-// Console.ReadKey();
+        if (watch.ElapsedMilliseconds > 2000)
+        {
+            if (!token.IsCancellationRequested)
+            {
+                Console.WriteLine("******Async operation for \"CallUriAsync\" has been cancelled******\n");
+                tokenSource.Cancel();
+            }
+        }
+    }
+}
+catch (OperationCanceledException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+finally
+{
+    tokenSource.Dispose();
+}
 
-// void DummyButtonClickButton() => Console.Write("==>");
+watch.Stop();
+Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
+Console.WriteLine("# of async calls  => " + asyncCallCounter + Environment.NewLine);
+Console.ReadKey();
 
-// async Task CallUriAsync(string uri)
-// {
-//     string content = string.Empty;
-//     try
-//     {
-//         content = await new HttpClient().GetStringAsync(uri);
-//         Console.WriteLine("FB Code has a content length of " + content.Length);
-//         asyncCallCounter++;
-//     }
-//     catch (Exception ex)
-//     {
-//         Console.WriteLine(ex.Message);
-//     }
-// }
+void DummyButtonClickButton() => Console.Write("==>");
+
+async Task CallUriAsync(string uri, CancellationToken token)
+{
+    string content = string.Empty;
+    try
+    {
+        if (token.IsCancellationRequested)
+        {
+            // TODO: cleanup code
+
+            // return;
+            token.ThrowIfCancellationRequested();
+        }
+        content = await new HttpClient().GetStringAsync(uri);
+        Console.WriteLine("FB Code has a content length of " + content.Length);
+        asyncCallCounter++;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
 
 #endregion
 
 #region Sleep sort
 
-var input = new[] { 1, 9, 2, 1, 3, 10, 83, 65, 23 };
+// var input = new[] { 1, 9, 2, 1, 3, 10, 83, 65, 23 };
 
-foreach (var n in input)
-{
-    Task.Run(() =>
-    {
-        Thread.Sleep(n * 10);
-        Console.WriteLine(n);
-    });
-}
+// foreach (var n in input)
+// {
+//     Task.Run(() =>
+//     {
+//         Thread.Sleep(n * 10);
+//         Console.WriteLine(n);
+//     });
+// }
 
-Console.ReadKey();
+// Console.ReadKey();
 
 #endregion
 
