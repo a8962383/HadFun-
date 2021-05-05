@@ -399,22 +399,24 @@ using System.Net.Http;
 #region Behavioral Patterns
 #region Memento
 
-Editor o = new Editor();
-o.Text = "On";
+Editor editor = new Editor();
+editor.Text = "1";
 
 // Store internal state in Manager/Caretaker/Organizer/StateContainer
 StateContainer stateContainer = new StateContainer();
-stateContainer.LastEditorState = o.GetState();
+stateContainer.LastEditorState = editor.GetState();
 
 // Continue changing editor
-o.Text = "Off";
+editor.Text = "2";
+stateContainer.LastEditorState = editor.GetState();
 
+editor.Text = "3";
 // Restore saved state
-o.SetEditorState(stateContainer.LastEditorState);
+editor.SetState(stateContainer.LastEditorState);
 
 // Wait for user
 Console.ReadKey();
-
+ 
 
 /// <summary>
 /// The 'Originator' class
@@ -430,7 +432,7 @@ class Editor
         set
         {
             _text = value;
-            Console.WriteLine("State = " + _text);
+            Console.WriteLine("EditorText = " + _text);
         }
     }
 
@@ -441,7 +443,7 @@ class Editor
     }
 
     // Restores original state
-    public void SetEditorState(LastEditorState state)
+    public void SetState(LastEditorState state)
     {
         Console.WriteLine("Restoring state...");
         Text = state.Text;
