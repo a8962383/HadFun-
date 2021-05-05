@@ -305,75 +305,76 @@ using System.Net.Http;
 
 // Console.WriteLine("Seq. execution time: " + ((double)(s1.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
 // Console.WriteLine("Par. execution time: " + ((double)(s2.Elapsed.TotalMilliseconds * 1000000) / m).ToString("0.00 ns"));
+// Console.ReadKey();
 #endregion
 
 #region Game of Concurrency with CancellationToken
 
-"Calling Facebook Code.".Dump();
-"UI thread is free now...".Dump();
-int uiCallCounter = 0;
-int asyncCallCounter = 0;
-var tokenSource = new CancellationTokenSource();
-var token = tokenSource.Token;
-Stopwatch watch = new Stopwatch();
-watch.Start();
+// "Calling Facebook Code.".Dump();
+// "UI thread is free now...".Dump();
+// int uiCallCounter = 0;
+// int asyncCallCounter = 0;
+// var tokenSource = new CancellationTokenSource();
+// var token = tokenSource.Token;
+// Stopwatch watch = new Stopwatch();
+// watch.Start();
 
-try
-{
-    while (watch.ElapsedMilliseconds < 5001)
-    {
-        CallUriAsync("https://engineering.fb.com/", token);
-        DummyButtonClickButton();
-        Thread.Sleep(100);
-        uiCallCounter++;
+// try
+// {
+//     while (watch.ElapsedMilliseconds < 5001)
+//     {
+//         CallUriAsync("https://engineering.fb.com/", token);
+//         DummyButtonClickButton();
+//         Thread.Sleep(100);
+//         uiCallCounter++;
 
-        if (watch.ElapsedMilliseconds > 2000)
-        {
-            if (!token.IsCancellationRequested)
-            {
-                Console.WriteLine("******Async operation for \"CallUriAsync\" has been cancelled******\n");
-                tokenSource.Cancel();
-            }
-        }
-    }
-}
-catch (OperationCanceledException ex)
-{
-    Console.WriteLine(ex.Message);
-}
-finally
-{
-    tokenSource.Dispose();
-}
+//         if (watch.ElapsedMilliseconds > 2000)
+//         {
+//             if (!token.IsCancellationRequested)
+//             {
+//                 Console.WriteLine("******Async operation for \"CallUriAsync\" has been cancelled******\n");
+//                 tokenSource.Cancel();
+//             }
+//         }
+//     }
+// }
+// catch (OperationCanceledException ex)
+// {
+//     Console.WriteLine(ex.Message);
+// }
+// finally
+// {
+//     tokenSource.Dispose();
+// }
 
-watch.Stop();
-Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
-Console.WriteLine("# of async calls  => " + asyncCallCounter + Environment.NewLine);
-Console.ReadKey();
+// watch.Stop();
+// Console.WriteLine(Environment.NewLine + "# of dummy clicks => " + uiCallCounter);
+// Console.WriteLine("# of async calls  => " + asyncCallCounter + Environment.NewLine);
+// Console.ReadKey();
 
-void DummyButtonClickButton() => Console.Write("==>");
+// void DummyButtonClickButton() => Console.Write("==>");
 
-async Task CallUriAsync(string uri, CancellationToken token)
-{
-    string content = string.Empty;
-    try
-    {
-        if (token.IsCancellationRequested)
-        {
-            // TODO: cleanup code
+// async Task CallUriAsync(string uri, CancellationToken token)
+// {
+//     string content = string.Empty;
+//     try
+//     {
+//         if (token.IsCancellationRequested)
+//         {
+//             // TODO: cleanup code
 
-            // return;
-            token.ThrowIfCancellationRequested();
-        }
-        content = await new HttpClient().GetStringAsync(uri);
-        Console.WriteLine("FB Code has a content length of " + content.Length);
-        asyncCallCounter++;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
+//             // return;
+//             token.ThrowIfCancellationRequested();
+//         }
+//         content = await new HttpClient().GetStringAsync(uri);
+//         Console.WriteLine("FB Code has a content length of " + content.Length);
+//         asyncCallCounter++;
+//     }
+//     catch (Exception ex)
+//     {
+//         Console.WriteLine(ex.Message);
+//     }
+// }
 
 #endregion
 
@@ -391,6 +392,95 @@ async Task CallUriAsync(string uri, CancellationToken token)
 // }
 
 // Console.ReadKey();
+
+#endregion
+
+#region Design Patters
+#region Behavioral Patterns
+#region Memento
+
+Editor o = new Editor();
+o.Text = "On";
+
+// Store internal state in Manager/Caretaker/Organizer/StateContainer
+StateContainer stateContainer = new StateContainer();
+stateContainer.LastEditorState = o.GetState();
+
+// Continue changing editor
+o.Text = "Off";
+
+// Restore saved state
+o.SetEditorState(stateContainer.LastEditorState);
+
+// Wait for user
+Console.ReadKey();
+
+
+/// <summary>
+/// The 'Originator' class
+/// </summary>
+class Editor
+{
+    private string _text;
+
+    // Property
+    public string Text
+    {
+        get { return _text; }
+        set
+        {
+            _text = value;
+            Console.WriteLine("State = " + _text);
+        }
+    }
+
+    // Creates memento 
+    public LastEditorState GetState()
+    {
+        return (new LastEditorState(_text));
+    }
+
+    // Restores original state
+    public void SetEditorState(LastEditorState state)
+    {
+        Console.WriteLine("Restoring state...");
+        Text = state.Text;
+    }
+}
+
+/// <summary>
+/// The 'Memento' class
+/// </summary>
+class LastEditorState
+{
+    // Gets or sets state
+    public string Text { get; }
+
+    public LastEditorState(string text)
+    {
+        this.Text = text;
+    }
+}
+
+/// <summary>
+/// The 'Caretaker' class
+/// </summary>
+class StateContainer
+{
+    public LastEditorState LastEditorState { get; set; }
+}
+
+#endregion
+
+#endregion
+
+#region Structural  Patterns
+
+#endregion
+
+#region Creational Patterns
+
+#endregion
 
 #endregion
 
