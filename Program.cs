@@ -396,81 +396,83 @@ using System.Net.Http;
 #endregion
 
 #region Design Patters
+
 #region Behavioral Patterns
+
 #region Memento
 
-Editor editor = new Editor();
-editor.Text = "1";
+// Editor editor = new Editor();
+// editor.Text = "1";
 
-// Store internal state in Manager/Caretaker/Organizer/StateContainer
-StateContainer stateContainer = new StateContainer();
-stateContainer.LastEditorState = editor.GetState();
+// // Store internal state in Manager/Caretaker/Organizer/StateContainer
+// StateContainer stateContainer = new StateContainer();
+// stateContainer.LastEditorState = editor.GetState();
 
-// Continue changing editor
-editor.Text = "2";
-stateContainer.LastEditorState = editor.GetState();
+// // Continue changing editor
+// editor.Text = "2";
+// stateContainer.LastEditorState = editor.GetState();
 
-editor.Text = "3";
-// Restore saved state
-editor.SetState(stateContainer.LastEditorState);
+// editor.Text = "3";
+// // Restore saved state
+// editor.SetState(stateContainer.LastEditorState);
 
-// Wait for user
-Console.ReadKey();
- 
+// // Wait for user
+// Console.ReadKey();
 
-/// <summary>
-/// The 'Originator' class
-/// </summary>
-class Editor
-{
-    private string _text;
 
-    // Property
-    public string Text
-    {
-        get { return _text; }
-        set
-        {
-            _text = value;
-            Console.WriteLine("EditorText = " + _text);
-        }
-    }
+// /// <summary>
+// /// The 'Originator' class
+// /// </summary>
+// class Editor
+// {
+//     private string _text;
 
-    // Creates memento 
-    public LastEditorState GetState()
-    {
-        return (new LastEditorState(_text));
-    }
+//     // Property
+//     public string Text
+//     {
+//         get { return _text; }
+//         set
+//         {
+//             _text = value;
+//             Console.WriteLine("EditorText = " + _text);
+//         }
+//     }
 
-    // Restores original state
-    public void SetState(LastEditorState state)
-    {
-        Console.WriteLine("Restoring state...");
-        Text = state.Text;
-    }
-}
+//     // Creates memento 
+//     public LastEditorState GetState()
+//     {
+//         return (new LastEditorState(_text));
+//     }
 
-/// <summary>
-/// The 'Memento' class
-/// </summary>
-class LastEditorState
-{
-    // Gets or sets state
-    public string Text { get; }
+//     // Restores original state
+//     public void SetState(LastEditorState state)
+//     {
+//         Console.WriteLine("Restoring state...");
+//         Text = state.Text;
+//     }
+// }
 
-    public LastEditorState(string text)
-    {
-        this.Text = text;
-    }
-}
+// /// <summary>
+// /// The 'Memento' class
+// /// </summary>
+// class LastEditorState
+// {
+//     // Gets or sets state
+//     public string Text { get; }
 
-/// <summary>
-/// The 'Caretaker' class
-/// </summary>
-class StateContainer
-{
-    public LastEditorState LastEditorState { get; set; }
-}
+//     public LastEditorState(string text)
+//     {
+//         this.Text = text;
+//     }
+// }
+
+// /// <summary>
+// /// The 'Caretaker' class
+// /// </summary>
+// class StateContainer
+// {
+//     public LastEditorState LastEditorState { get; set; }
+// }
 
 #endregion
 
@@ -481,6 +483,116 @@ class StateContainer
 #endregion
 
 #region Creational Patterns
+
+#region Builder
+
+// Create director and builders
+Director director = new Director();
+
+Builder b1 = new ConcreteBuilder1();
+Builder b2 = new ConcreteBuilder2();
+
+// Construct two products
+director.Construct(b1);
+Product p1 = b1.GetResult();
+p1.Show();
+
+director.Construct(b2);
+Product p2 = b2.GetResult();
+p2.Show();
+
+Console.ReadKey();
+
+/// <summary>
+/// The 'Director' class
+/// </summary>
+class Director
+{
+    // Builder uses a complex series of steps
+    public void Construct(Builder builder)
+    {
+        builder.BuildPartA();
+        builder.BuildPartB();
+    }
+}
+
+/// <summary>
+/// The 'Builder' abstract class
+/// </summary>
+abstract class Builder
+{
+    public abstract void BuildPartA();
+    public abstract void BuildPartB();
+    public abstract Product GetResult();
+}
+
+/// <summary>
+/// The 'ConcreteBuilder1' class
+/// </summary>
+class ConcreteBuilder1 : Builder
+{
+    private Product _product = new Product();
+
+    public override void BuildPartA()
+    {
+        _product.Add("PartA");
+    }
+
+    public override void BuildPartB()
+    {
+        _product.Add("PartB");
+    }
+
+    public override Product GetResult()
+    {
+        return _product;
+    }
+}
+
+/// <summary>
+/// The 'ConcreteBuilder2' class
+/// </summary>
+class ConcreteBuilder2 : Builder
+{
+    private Product _product = new Product();
+
+    public override void BuildPartA()
+    {
+        _product.Add("PartX");
+    }
+
+    public override void BuildPartB()
+    {
+        _product.Add("PartY");
+    }
+
+    public override Product GetResult()
+    {
+        return _product;
+    }
+}
+
+/// <summary>
+/// The 'Product' class
+/// </summary>
+public class Product
+{
+    private List<string> _parts = new List<string>();
+
+    public void Add(string part)
+    {
+        _parts.Add(part);
+    }
+
+    public void Show()
+    {
+        Console.WriteLine("\nProduct Parts -------");
+        foreach (string part in _parts)
+            Console.WriteLine(part);
+    }
+}
+
+#endregion
 
 #endregion
 
