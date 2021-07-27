@@ -29,3 +29,4 @@ obj/Debug/net5.0/ref/Test.dll
 .vscode/tasks.json
 bin/Debug/net5.0/Test
 obj/Debug/net5.0/apphost
+obj/Debug/net5.0/Test.csproj.AssemblyReference.cache

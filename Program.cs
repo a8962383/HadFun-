@@ -486,119 +486,168 @@ using System.Net.Http;
 
 #region Builder
 
-// Create director and builders
-Director director = new Director();
+// // Create director and builders
+// Director director = new Director();
 
-Builder b1 = new ConcreteBuilder1();
-Builder b2 = new ConcreteBuilder2();
+// Builder b1 = new ConcreteBuilder1();
+// Builder b2 = new ConcreteBuilder2();
 
-// Construct two products
-director.Construct(b1);
-Product p1 = b1.GetResult();
-p1.Show();
+// // Construct two products
+// director.Construct(b1);
+// Product p1 = b1.GetResult();
+// p1.Show();
 
-director.Construct(b2);
-Product p2 = b2.GetResult();
-p2.Show();
+// director.Construct(b2);
+// Product p2 = b2.GetResult();
+// p2.Show();
 
-Console.ReadKey();
+// Console.ReadKey();
 
-/// <summary>
-/// The 'Director' class
-/// </summary>
-class Director
-{
-    // Builder uses a complex series of steps
-    public void Construct(Builder builder)
-    {
-        builder.BuildPartA();
-        builder.BuildPartB();
-    }
-}
+// /// <summary>
+// /// The 'Director' class
+// /// </summary>
+// class Director
+// {
+//     // Builder uses a complex series of steps
+//     public void Construct(Builder builder)
+//     {
+//         builder.BuildPartA();
+//         builder.BuildPartB();
+//     }
+// }
 
-/// <summary>
-/// The 'Builder' abstract class
-/// </summary>
-abstract class Builder
-{
-    public abstract void BuildPartA();
-    public abstract void BuildPartB();
-    public abstract Product GetResult();
-}
+// /// <summary>
+// /// The 'Builder' abstract class
+// /// </summary>
+// abstract class Builder
+// {
+//     public abstract void BuildPartA();
+//     public abstract void BuildPartB();
+//     public abstract Product GetResult();
+// }
 
-/// <summary>
-/// The 'ConcreteBuilder1' class
-/// </summary>
-class ConcreteBuilder1 : Builder
-{
-    private Product _product = new Product();
+// /// <summary>
+// /// The 'ConcreteBuilder1' class
+// /// </summary>
+// class ConcreteBuilder1 : Builder
+// {
+//     private Product _product = new Product();
 
-    public override void BuildPartA()
-    {
-        _product.Add("PartA");
-    }
+//     public override void BuildPartA()
+//     {
+//         _product.Add("PartA");
+//     }
 
-    public override void BuildPartB()
-    {
-        _product.Add("PartB");
-    }
+//     public override void BuildPartB()
+//     {
+//         _product.Add("PartB");
+//     }
 
-    public override Product GetResult()
-    {
-        return _product;
-    }
-}
+//     public override Product GetResult()
+//     {
+//         return _product;
+//     }
+// }
 
-/// <summary>
-/// The 'ConcreteBuilder2' class
-/// </summary>
-class ConcreteBuilder2 : Builder
-{
-    private Product _product = new Product();
+// /// <summary>
+// /// The 'ConcreteBuilder2' class
+// /// </summary>
+// class ConcreteBuilder2 : Builder
+// {
+//     private Product _product = new Product();
 
-    public override void BuildPartA()
-    {
-        _product.Add("PartX");
-    }
+//     public override void BuildPartA()
+//     {
+//         _product.Add("PartX");
+//     }
 
-    public override void BuildPartB()
-    {
-        _product.Add("PartY");
-    }
+//     public override void BuildPartB()
+//     {
+//         _product.Add("PartY");
+//     }
 
-    public override Product GetResult()
-    {
-        return _product;
-    }
-}
+//     public override Product GetResult()
+//     {
+//         return _product;
+//     }
+// }
 
-/// <summary>
-/// The 'Product' class
-/// </summary>
-public class Product
-{
-    private List<string> _parts = new List<string>();
+// /// <summary>
+// /// The 'Product' class
+// /// </summary>
+// public class Product
+// {
+//     private List<string> _parts = new List<string>();
 
-    public void Add(string part)
-    {
-        _parts.Add(part);
-    }
+//     public void Add(string part)
+//     {
+//         _parts.Add(part);
+//     }
 
-    public void Show()
-    {
-        Console.WriteLine("\nProduct Parts -------");
-        foreach (string part in _parts)
-            Console.WriteLine(part);
-    }
-}
+//     public void Show()
+//     {
+//         Console.WriteLine("\nProduct Parts -------");
+//         foreach (string part in _parts)
+//             Console.WriteLine(part);
+//     }
+// }
+
+#endregion
 
 #endregion
 
 #endregion
+
+#region Events & delegates
+var video = new Video() { Title = "Mission Impossible 1", Uri = "https://code.jquery.com/git/jquery-git.slim.min.js" };
+var videoDownloader = new VideoDownloader();
+
+var emailService = new EmailService();
+videoDownloader.VideoDownloaded += emailService.OnVideoDownloaded;
+
+videoDownloader.Download(video);
+
+public class Video
+{
+    public string Title { get; set; }
+    public string Uri { get; set; }
+}
+
+public class VideoDownloader
+{
+    //1. Define delegate
+    //2. Define event
+    //3. Raise event
+
+    public delegate void VideoEncodedEventHandler(object source, EventArgs args);
+    public event VideoEncodedEventHandler VideoDownloaded;
+    public void Download(Video video)
+    {
+        System.Console.WriteLine("VideoDownloader: Downloading \"" + video.Title + "\" using URI...");
+        Thread.Sleep(2500);
+
+        OnVideoDownloaded(video);
+    }
+
+    public void OnVideoDownloaded(Video video)
+    {
+        if (VideoDownloaded != null)
+            VideoDownloaded(this, EventArgs.Empty);
+    }
+}
+
+public class EmailService
+{
+    public void OnVideoDownloaded(object source, EventArgs args)
+    {
+        System.Console.WriteLine("EmailService: Sending email for...");
+    }
+}
 
 #endregion
 
 #region Extension Methods
+
 namespace ExtensionMethods
 {
     public static class MyExtensions
@@ -616,5 +665,98 @@ namespace ExtensionMethods
         }
     }
 }
+
+#endregion
+
+#region GitHub Copilot fun
+// // Person class with name, age, and email
+// public class Person
+// {
+//     public string Name { get; set; }
+//     public int Age { get; set; }
+//     public string Email { get; set; }
+
+//     //create a method to get name
+//     public string GetName()
+//     {
+//         return this.Name;
+//     }
+
+//     //create a method to get name using reflection
+//     public string GetNameReflection()
+//     {
+//         return this.GetType().GetProperty("Name").GetValue(this, null).ToString();
+//     }
+
+//     //create a mthod to find a person by name from a list of people
+//     public static Person FindByName(List<Person> people, string name)
+//     {
+//         foreach (var person in people)
+//         {
+//             if (person.Name == name)
+//                 return person;
+//         }
+//         return null;
+//     }
+
+//     //create a method to find persons by name from a list of people
+//     public static List<Person> FindByName(List<Person> people, string name, string email)
+//     {
+//         var results = new List<Person>();
+//         foreach (var person in people)
+//         {
+//             if (person.Name == name && person.Email == email)
+//                 results.Add(person);
+//         }
+//         return results;
+//     }
+
+//     //create a method to identify a prime number
+//     public static bool IsPrime(int number)
+//     {
+//         if (number < 2)
+//             return false;
+
+//         for (int i = 2; i <= Math.Sqrt(number); i++)
+//         {
+//             if (number % i == 0)
+//                 return false;
+//         }
+//         return true;
+//     }
+
+//     // create a method to identify a complex number
+//     public static bool IsComplex(double real, double imaginary)
+//     {
+//         if (real == 0 && imaginary == 0)
+//             return false;
+
+//         if (real == 0 && imaginary != 0)
+//             return true;
+
+//         if (real != 0 && imaginary == 0)
+//             return true;
+
+//         if (real > 0 && imaginary > 0)
+//             return true;
+
+//         if (real < 0 && imaginary < 0)
+//             return true;
+
+//         return false;
+//     }
+
+//     // create a method to return the worst javascript framework
+//     public static string WorstJavascriptFramework()
+//     {
+//         return "Angular.js";
+//     }
+
+//     // create a method to return the worst C# framework
+//     public static string WorstCSharpFramework()
+//     {
+//         return "ASP.NET";
+//     }
+// }
 
 #endregion
