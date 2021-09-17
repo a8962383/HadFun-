@@ -19,7 +19,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using ExtensionMethods;
 using System.Net.Http;
 
 #region Proxy server
@@ -599,72 +598,50 @@ using System.Net.Http;
 #endregion
 
 #region Events & delegates
-var video = new Video() { Title = "Mission Impossible 1", Uri = "https://code.jquery.com/git/jquery-git.slim.min.js" };
-var videoDownloader = new VideoDownloader();
+// var video = new Video() { Title = "Mission Impossible 1", Uri = "https://code.jquery.com/git/jquery-git.slim.min.js" };
+// var videoDownloader = new VideoDownloader();
 
-var emailService = new EmailService();
-videoDownloader.VideoDownloaded += emailService.OnVideoDownloaded;
+// var emailService = new EmailService();
+// videoDownloader.VideoDownloaded += emailService.OnVideoDownloaded;
 
-videoDownloader.Download(video);
+// videoDownloader.Download(video);
 
-public class Video
-{
-    public string Title { get; set; }
-    public string Uri { get; set; }
-}
+// public class Video
+// {
+//     public string Title { get; set; }
+//     public string Uri { get; set; }
+// }
 
-public class VideoDownloader
-{
-    //1. Define delegate
-    //2. Define event
-    //3. Raise event
+// public class VideoDownloader
+// {
+//     //1. Define delegate
+//     //2. Define event
+//     //3. Raise event
 
-    public delegate void VideoEncodedEventHandler(object source, EventArgs args);
-    public event VideoEncodedEventHandler VideoDownloaded;
-    public void Download(Video video)
-    {
-        System.Console.WriteLine("VideoDownloader: Downloading \"" + video.Title + "\" using URI...");
-        Thread.Sleep(2500);
+//     public delegate void VideoEncodedEventHandler(object source, EventArgs args);
+//     public event VideoEncodedEventHandler VideoDownloaded;
+//     public void Download(Video video)
+//     {
+//         System.Console.WriteLine("VideoDownloader: Downloading \"" + video.Title + "\" using URI...");
+//         Thread.Sleep(2500);
 
-        OnVideoDownloaded(video);
-    }
+//         OnVideoDownloaded(video);
+//     }
 
-    public void OnVideoDownloaded(Video video)
-    {
-        if (VideoDownloaded != null)
-            VideoDownloaded(this, EventArgs.Empty);
-    }
-}
+//     public void OnVideoDownloaded(Video video)
+//     {
+//         if (VideoDownloaded != null)
+//             VideoDownloaded(this, EventArgs.Empty);
+//     }
+// }
 
-public class EmailService
-{
-    public void OnVideoDownloaded(object source, EventArgs args)
-    {
-        System.Console.WriteLine("EmailService: Sending email for...");
-    }
-}
-
-#endregion
-
-#region Extension Methods
-
-namespace ExtensionMethods
-{
-    public static class MyExtensions
-    {
-        public static int WordCount(this string str)
-        {
-            return str.Split(new char[] { ' ', '.', '?' },
-                             StringSplitOptions.RemoveEmptyEntries).Length;
-        }
-
-        public static void Dump<T>(this T obj, bool indent = false)
-        {
-            Console.WriteLine(JsonConvert.SerializeObject(obj, indent ? Newtonsoft.Json.Formatting.Indented : Newtonsoft.Json.Formatting.None,
-            new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
-        }
-    }
-}
+// public class EmailService
+// {
+//     public void OnVideoDownloaded(object source, EventArgs args)
+//     {
+//         System.Console.WriteLine("EmailService: Sending email for...");
+//     }
+// }
 
 #endregion
 
@@ -760,3 +737,18 @@ namespace ExtensionMethods
 // }
 
 #endregion
+
+#region Random tests
+string str = " ";
+if (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str))
+{
+    Console.WriteLine("nothing");
+}
+
+if (!Process.GetProcessesByName(str.Split(".exe").First()).Any())
+    Console.WriteLine("nothing");
+else
+    Console.WriteLine("run");
+#endregion
+
+Console.ReadKey();
