@@ -738,17 +738,92 @@ using System.Net.Http;
 
 #endregion
 
-#region Random tests
-string str = " ";
-if (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str))
+#region Check total free space of fixed drive in multi-threaded application
+
+string path = @"MyTest.txt";
+var random = new Random();
+Stopwatch watch = new Stopwatch();
+
+watch.Start();
+
+
+var fileWrtitingTask = WriteToFileFor2SecondsAsync(path);
+
+var dictionary = new ConcurrentDictionary<long, long>();
+Parallel.For(0, 10000, (i) =>
 {
-    Console.WriteLine("nothing");
+    dictionary.TryAdd(watch.ElapsedMilliseconds, DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).Single().TotalFreeSpace);
+});
+
+dictionary.OrderBy(d => d.Key).ToList().ForEach(d => Console.WriteLine(d.Key + " -> " + d.Value));
+Console.WriteLine(dictionary.Keys.Max() + 1 + " -> " + DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).Single().TotalFreeSpace);
+Console.WriteLine("As the file size grows, available total free space decreases.");
+Task.WaitAll(fileWrtitingTask);
+File.Delete(path);
+
+async Task WriteToFileFor2SecondsAsync(string path)
+{
+    var random = new Random();
+    await Task.Run(() =>
+    {
+        if (!File.Exists(path))
+        {
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine(random.Next(1, 10000));
+            }
+        }
+
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            while (watch.ElapsedMilliseconds < 2000)
+            {
+                sw.WriteLine(random.Next(1, 10000));
+            }
+            watch.Stop();
+        }
+    });
 }
 
-if (!Process.GetProcessesByName(str.Split(".exe").First()).Any())
-    Console.WriteLine("nothing");
-else
-    Console.WriteLine("run");
+#endregion
+
+#region Random tests
+
+// var os = Environment.OSVersion;
+// Console.WriteLine("Current OS Information:\n");
+// Console.WriteLine("Platform: {0:G}", os.Platform);
+// Console.WriteLine("Version String: {0}", os.VersionString);
+// Console.WriteLine("Version Information:");
+// Console.WriteLine("   Major: {0}", os.Version.Major);
+// Console.WriteLine("   Minor: {0}", os.Version.Minor);
+// Console.WriteLine("Service Pack: '{0}'", os.ServicePack);
+
+
+// DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+// foreach (DriveInfo d in allDrives)
+// {
+//     Console.WriteLine("Drive {0}", d.Name);
+//     Console.WriteLine("  Drive type: {0}", d.DriveType);
+//     if (d.IsReady == true)
+//     {
+//         Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
+//         Console.WriteLine("  File system: {0}", d.DriveFormat);
+//         Console.WriteLine(
+//             "  Available space to current user:{0, 15} bytes",
+//             d.AvailableFreeSpace);
+
+//         Console.WriteLine(
+//             "  Total available space:          {0, 15} bytes",
+//             d.TotalFreeSpace);
+
+//         Console.WriteLine(
+//             "  Total size of drive:            {0, 15} bytes ",
+//             d.TotalSize);
+//     }
+// }
+
 #endregion
 
 Console.ReadKey();

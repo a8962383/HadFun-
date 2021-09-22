@@ -1,197 +1,197 @@
 {
-    "Layout": [
-      {
-        "Form": 231,
-        "Caption": "Dev Implicit Interest",
-        "Type": 2,
-        "Records": 0,
-        "Size": {
-          "Width": 146,
-          "Height": 422
-        }
-      },
-      {
-        "APLControlType": 53,
-        "Orientation": "Ver",
-        "Form": 231,
-        "Attachment": "Top left",
-        "Elements": [
-          {
-            "APLControlType": 51,
-            "Caption": "",
-            "Area": "grp1",
-            "TableLayout": {
-              "Areas": [
-                "_ grp1.c10111 grp1.c10111 grp1.c10111 _ grp1.c10112 grp1.c10112 _ grp1.c2687 grp1.c2687 _",
-                "_ _ grp1.labDate12 _ _ grp1.labDate23 _ _ grp1.labDate13 _ _",
-                "_ grp1.c10132 grp1.c10132 grp1.c10132 _ grp1.c10133 grp1.c10133 _ grp1.c10134 grp1.c10134 _",
-                "_ grp1.c2689 grp1.c2689 grp1.c2689 _ grp1.c2688 grp1.c2688 _ grp1.c2691 grp1.c2691 _",
-                "_ grp1.c2694 grp1.c2694 grp1.c2694 _ grp1.c2695 grp1.c2695 _ grp1.c2696 grp1.c2696 _"
-              ],
-              "Columns": "4px 96px 42px 54px 8px 42px 54px 8px 42px 54px 10px"
-            },
-            "Attachment": "Top left",
-            "Elements": [
-              {
-                "APLControlType": 50,
-                "Caption": "Date 1-2",
-                "Width": 96,
-                "Area": "grp1.labDate12",
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 50,
-                "Caption": "Date 2-3",
-                "Width": 96,
-                "Area": "grp1.labDate23",
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 50,
-                "Caption": "Date 1-3",
-                "Width": 96,
-                "Area": "grp1.labDate13",
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "Caption": "Date",
-                "FieldPointer": 10111,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c10111",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "FieldPointer": 10112,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c10112",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "FieldPointer": 2687,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2687",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "Caption": "Interest",
-                "FieldPointer": 10132,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c10132",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "FieldPointer": 10133,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c10133",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 1,
-                "FieldPointer": 10134,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c10134",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "Caption": "Day count conv.",
-                "FieldPointer": 2689,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2689",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "FieldPointer": 2688,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2688",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "FieldPointer": 2691,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2691",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "Caption": "Interest conv.",
-                "FieldPointer": 2694,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2694",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "FieldPointer": 2695,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2695",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              },
-              {
-                "APLControlType": 11,
-                "FieldPointer": 2696,
-                "Buffer": 266,
-                "BufferIndex": 1,
-                "Width": 96,
-                "Height": 20,
-                "Area": "grp1.c2696",
-                "Alignment": 0,
-                "Attachment": "Top left"
-              }
-            ]
-          }
-        ]
+  "Layout": [
+    {
+      "Form": 231,
+      "Caption": "Dev Implicit Interest",
+      "Type": 2,
+      "Records": 0,
+      "Size": {
+        "Width": 146,
+        "Height": 422
       }
-    ]
-  }
+    },
+    {
+      "APLControlType": 53,
+      "Orientation": "Ver",
+      "Form": 231,
+      "Attachment": "Top left",
+      "Elements": [
+        {
+          "APLControlType": 51,
+          "Caption": "",
+          "Area": "grp1",
+          "TableLayout": {
+            "Areas": [
+              "_ grp1.c10111 grp1.c10111 grp1.c10111 _ grp1.c10112 grp1.c10112 _ grp1.c2687 grp1.c2687 _",
+              "_ _ grp1.labDate12 _ _ grp1.labDate23 _ _ grp1.labDate13 _ _",
+              "_ grp1.c10132 grp1.c10132 grp1.c10132 _ grp1.c10133 grp1.c10133 _ grp1.c10134 grp1.c10134 _",
+              "_ grp1.c2689 grp1.c2689 grp1.c2689 _ grp1.c2688 grp1.c2688 _ grp1.c2691 grp1.c2691 _",
+              "_ grp1.c2694 grp1.c2694 grp1.c2694 _ grp1.c2695 grp1.c2695 _ grp1.c2696 grp1.c2696 _"
+            ],
+            "Columns": "4px 96px 42px 54px 8px 42px 54px 8px 42px 54px 10px"
+          },
+          "Attachment": "Top left",
+          "Elements": [
+            {
+              "APLControlType": 50,
+              "Caption": "Date 1-2",
+              "Width": 96,
+              "Area": "grp1.labDate12",
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 50,
+              "Caption": "Date 2-3",
+              "Width": 96,
+              "Area": "grp1.labDate23",
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 50,
+              "Caption": "Date 1-3",
+              "Width": 96,
+              "Area": "grp1.labDate13",
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "Caption": "Date",
+              "FieldPointer": 10111,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c10111",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "FieldPointer": 10112,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c10112",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "FieldPointer": 2687,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2687",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "Caption": "Interest",
+              "FieldPointer": 10132,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c10132",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "FieldPointer": 10133,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c10133",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 1,
+              "FieldPointer": 10134,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c10134",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "Caption": "Day count conv.",
+              "FieldPointer": 2689,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2689",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "FieldPointer": 2688,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2688",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "FieldPointer": 2691,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2691",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "Caption": "Interest conv.",
+              "FieldPointer": 2694,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2694",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "FieldPointer": 2695,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2695",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            },
+            {
+              "APLControlType": 11,
+              "FieldPointer": 2696,
+              "Buffer": 266,
+              "BufferIndex": 1,
+              "Width": 96,
+              "Height": 20,
+              "Area": "grp1.c2696",
+              "Alignment": 0,
+              "Attachment": "Top left"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
