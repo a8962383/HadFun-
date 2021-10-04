@@ -787,10 +787,15 @@ using System.Net.Http;
 
 #region Random tests
 
-Console.WriteLine("Now: {0}", DateTime.Now.Ticks);
-Console.WriteLine("UTC: {0}", DateTime.Now.ToUniversalTime());
-Console.WriteLine("Local: {0}", DateTime.Now.ToUniversalTime().ToLocalTime());
+DisplayDateWithTimeZoneName(DateTime.UtcNow, TimeZoneInfo.Utc);
+
+void DisplayDateWithTimeZoneName(DateTime date1, TimeZoneInfo timeZone)
+{
+    Console.WriteLine("The time is {0:t} on {0:d}. \nTime zone: {1}. \nEnable DST: {2} \nOffset with UTC: {3}",
+                      date1,
+                      timeZone.IsDaylightSavingTime(date1) ? timeZone.DaylightName : timeZone.StandardName,
+                      timeZone.IsDaylightSavingTime(date1),
+                      timeZone.GetUtcOffset(date1));
+}
 
 #endregion
-
-Console.ReadKey();
