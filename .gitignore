@@ -30,3 +30,6 @@ obj/Debug/net5.0/ref/Test.dll
 bin/Debug/net5.0/Test
 obj/Debug/net5.0/apphost
 obj/Debug/net5.0/Test.csproj.AssemblyReference.cache
+/.vs
+/obj
+/bin/Debug/net6.0
