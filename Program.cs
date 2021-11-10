@@ -785,17 +785,44 @@ using System.Net.Http;
 
 #endregion
 
-#region Random tests
+#region Linq performance
 
-DisplayDateWithTimeZoneName(DateTime.UtcNow, TimeZoneInfo.Utc);
+var numberList = Enumerable.Range(1, 1000000000).ToList();
+var i = new Random().Next(1, 1000000000);
+Stopwatch sw = new Stopwatch();
 
-void DisplayDateWithTimeZoneName(DateTime date1, TimeZoneInfo timeZone)
-{
-    Console.WriteLine("The time is {0:t} on {0:d}. \nTime zone: {1}. \nEnable DST: {2} \nOffset with UTC: {3}",
-                      date1,
-                      timeZone.IsDaylightSavingTime(date1) ? timeZone.DaylightName : timeZone.StandardName,
-                      timeZone.IsDaylightSavingTime(date1),
-                      timeZone.GetUtcOffset(date1));
-}
+sw.Restart();
+var firstOrDefault = numberList.FirstOrDefault(n => n > i);
+sw.Stop();
+Console.WriteLine("FirstOrDefault: " + sw.ElapsedMilliseconds);
+
+sw.Start();
+var whereFirstOrDefault = numberList.Where(n => n > i).FirstOrDefault();
+sw.Stop();
+Console.WriteLine("Where-FirstOrDefault: " + sw.ElapsedMilliseconds);
+
+sw.Restart();
+var count = numberList.Count(n => n > i);
+sw.Stop();
+Console.WriteLine("Count: " + sw.ElapsedMilliseconds);
+
+sw.Restart();
+var whereCount = numberList.Where(n => n > i).Count();
+sw.Stop();
+Console.WriteLine("Where-Count: " + sw.ElapsedMilliseconds);
+
+sw.Restart();
+var max = numberList.Max(n => n > i);
+sw.Stop();
+Console.WriteLine("Max: " + sw.ElapsedMilliseconds);
+
+sw.Restart();
+var whereMax = numberList.Where(n => n > i).Max();
+sw.Stop();
+Console.WriteLine("Where-Max: " + sw.ElapsedMilliseconds);
+
+#endregion
+
+#region Random test
 
 #endregion
