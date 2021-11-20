@@ -787,39 +787,50 @@ using System.Net.Http;
 
 #region Linq performance
 
-var numberList = Enumerable.Range(1, 1000000000).ToList();
-var i = new Random().Next(1, 1000000000);
-Stopwatch sw = new Stopwatch();
+// var numberList = Enumerable.Range(1, 1000000000).ToList();
+// var i = new Random().Next(1, 1000000000);
+// Stopwatch sw = new Stopwatch();
 
-sw.Restart();
-var firstOrDefault = numberList.FirstOrDefault(n => n > i);
-sw.Stop();
-Console.WriteLine("FirstOrDefault: " + sw.ElapsedMilliseconds);
+// sw.Restart();
+// var firstOrDefault = numberList.FirstOrDefault(n => n > i);
+// sw.Stop();
+// Console.WriteLine("FirstOrDefault: " + sw.ElapsedMilliseconds);
 
-sw.Start();
-var whereFirstOrDefault = numberList.Where(n => n > i).FirstOrDefault();
-sw.Stop();
-Console.WriteLine("Where-FirstOrDefault: " + sw.ElapsedMilliseconds);
+// sw.Start();
+// var whereFirstOrDefault = numberList.Where(n => n > i).FirstOrDefault();
+// sw.Stop();
+// Console.WriteLine("Where-FirstOrDefault: " + sw.ElapsedMilliseconds);
 
-sw.Restart();
-var count = numberList.Count(n => n > i);
-sw.Stop();
-Console.WriteLine("Count: " + sw.ElapsedMilliseconds);
+// sw.Restart();
+// var count = numberList.Count(n => n > i);
+// sw.Stop();
+// Console.WriteLine("Count: " + sw.ElapsedMilliseconds);
 
-sw.Restart();
-var whereCount = numberList.Where(n => n > i).Count();
-sw.Stop();
-Console.WriteLine("Where-Count: " + sw.ElapsedMilliseconds);
+// sw.Restart();
+// var whereCount = numberList.Where(n => n > i).Count();
+// sw.Stop();
+// Console.WriteLine("Where-Count: " + sw.ElapsedMilliseconds);
 
-sw.Restart();
-var max = numberList.Max(n => n > i);
-sw.Stop();
-Console.WriteLine("Max: " + sw.ElapsedMilliseconds);
+// sw.Restart();
+// var max = numberList.Max(n => n > i);
+// sw.Stop();
+// Console.WriteLine("Max: " + sw.ElapsedMilliseconds);
 
-sw.Restart();
-var whereMax = numberList.Where(n => n > i).Max();
-sw.Stop();
-Console.WriteLine("Where-Max: " + sw.ElapsedMilliseconds);
+// sw.Restart();
+// var whereMax = numberList.Where(n => n > i).Max();
+// sw.Stop();
+// Console.WriteLine("Where-Max: " + sw.ElapsedMilliseconds);
+
+#endregion
+
+#region Get memory address of an object
+
+object o = new object();
+TypedReference tr = __makeref(o);
+unsafe{
+IntPtr ptr = **(IntPtr**)(&tr);
+Console.WriteLine(ptr.ToString());
+}
 
 #endregion
 
