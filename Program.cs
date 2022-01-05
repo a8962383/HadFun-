@@ -827,9 +827,10 @@ using System.Net.Http;
 
 object o = new object();
 TypedReference tr = __makeref(o);
-unsafe{
-IntPtr ptr = **(IntPtr**)(&tr);
-Console.WriteLine(ptr.ToString());
+unsafe
+{
+    IntPtr ptr = **(IntPtr**)(&tr);
+    Console.WriteLine(ptr.ToString());
 }
 
 #endregion
