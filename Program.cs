@@ -858,23 +858,8 @@ foreach (var item in cq)
     Console.WriteLine(item);
 }
 
-Console.WriteLine("Clearing all items...");
-cq.ClearAll();
-Console.WriteLine("Final count: " + cq.Count);
-
 internal static class ConcurrentQueueExtensions
 {
-    public static void ClearAll<T>(this ConcurrentQueue<T> queue)
-    {
-        lock (queue)
-        {
-            while (queue.TryDequeue(out _))
-            {
-                // do nothing
-            }
-        }
-    }
-
     public static void ClearByItem<T>(this ConcurrentQueue<T> queue, T item)
     {
         var index = 0;
