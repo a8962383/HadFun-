@@ -825,12 +825,60 @@ using System.Net.Http;
 
 #region Get memory address of an object
 
-object o = new object();
-TypedReference tr = __makeref(o);
-unsafe{
-IntPtr ptr = **(IntPtr**)(&tr);
-Console.WriteLine(ptr.ToString());
-}
+// object o = new object();
+// TypedReference tr = __makeref(o);
+// unsafe
+// {
+//     IntPtr ptr = **(IntPtr**)(&tr);
+//     Console.WriteLine(ptr.ToString());
+// }
+
+#endregion
+
+#region ConcurrentQueue.ClearByItem extension method
+
+// var cq = new ConcurrentQueue<int>();
+
+// cq.Enqueue(1);
+// cq.Enqueue(2);
+// cq.Enqueue(3);
+// cq.Enqueue(4);
+// cq.Enqueue(5);
+// Console.WriteLine("All items...");
+// foreach (var item in cq)
+// {
+//     Console.WriteLine(item);
+// }
+
+// Console.WriteLine("Clearing by items: 3, 5");
+// cq.ClearByItem(3);
+// cq.ClearByItem(5);
+// foreach (var item in cq)
+// {
+//     Console.WriteLine(item);
+// }
+
+// internal static class ConcurrentQueueExtensions
+// {
+//     public static void ClearByItem<T>(this ConcurrentQueue<T> queue, T item)
+//     {
+//         var index = 0;
+
+//         lock (queue)
+//         {
+//             var count = queue.Count;
+//             T result;
+//             while (index < count && queue.TryDequeue(out result))
+//             {
+//                 if (!result.Equals(item))
+//                 {
+//                     queue.Enqueue(result);
+//                 }
+//                 index++;
+//             }
+//         }
+//     }
+// }
 
 #endregion
 
