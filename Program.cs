@@ -20,6 +20,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 #region Proxy server
 // object[] inputArray = new object[10];
@@ -825,12 +827,29 @@ using System.Net.Http;
 
 #region Get memory address of an object
 
-object o = new object();
-TypedReference tr = __makeref(o);
-unsafe{
-IntPtr ptr = **(IntPtr**)(&tr);
-Console.WriteLine(ptr.ToString());
-}
+//object o = new object();
+//TypedReference tr = __makeref(o);
+//unsafe{
+//IntPtr ptr = **(IntPtr**)(&tr);
+//Console.WriteLine(ptr.ToString());
+//}
+
+#endregion
+
+#region Regex vs MailAddress.TryCreate
+
+var emailAdrress = "a#@Ee@b.com";
+Regex oldRegex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+Stopwatch sw = new();
+sw.Start();
+for (int i = 0; i < 100000; i++) oldRegex.IsMatch(emailAdrress);
+sw.Stop();
+Console.WriteLine(@"Elapsed time with Regex: {0}", sw.ElapsedMilliseconds);
+
+sw.Restart();
+for (int i = 0; i < 100000; i++) MailAddress.TryCreate(emailAdrress, out _);
+sw.Stop();
+Console.WriteLine(@"Elapsed time with MailAddress.TryCreate: {0}", sw.ElapsedMilliseconds);
 
 #endregion
 
