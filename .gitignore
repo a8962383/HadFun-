@@ -2,5 +2,4 @@
 .vscode/tasks.json
 /.vs
 /obj
-/bin/Debug/net5.0
-/bin/Debug/net6.0
+/bin
