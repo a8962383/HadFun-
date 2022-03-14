@@ -22,6 +22,7 @@ using Newtonsoft.Json.Schema;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Threading.Channels;
 
 #region Proxy server
 // object[] inputArray = new object[10];
@@ -886,19 +887,40 @@ using System.Net.Mail;
 
 #region Regex vs MailAddress.TryCreate
 
-var emailAdrress = "a@b.com";
-Regex oldRegex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-Stopwatch sw = new();
-sw.Start();
-bool isValid = false;
-for (int i = 0; i < 1000000; i++) isValid = oldRegex.IsMatch(emailAdrress);
-sw.Stop();
-Console.WriteLine(@"Elapsed time for old check: {0}, with {1}", sw.ElapsedMilliseconds, isValid);
+// var emailAdrress = "a@b.com";
+// Regex oldRegex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+// Stopwatch sw = new();
+// sw.Start();
+// bool isValid = false;
+// for (int i = 0; i < 1000000; i++) isValid = oldRegex.IsMatch(emailAdrress);
+// sw.Stop();
+// Console.WriteLine(@"Elapsed time for old check: {0}, with {1}", sw.ElapsedMilliseconds, isValid);
 
-sw.Restart();
-for (int i = 0; i < 1000000; i++) isValid = MailAddress.TryCreate(emailAdrress, out _);
-sw.Stop();
-Console.WriteLine(@"Elapsed time for new check: {0}, with {1}", sw.ElapsedMilliseconds, isValid);
+// sw.Restart();
+// for (int i = 0; i < 1000000; i++) isValid = MailAddress.TryCreate(emailAdrress, out _);
+// sw.Stop();
+// Console.WriteLine(@"Elapsed time for new check: {0}, with {1}", sw.ElapsedMilliseconds, isValid);
+
+#endregion
+
+#region Channel
+
+var c = Channel.CreateBounded<int>(1); 
+
+_ = Task.Run(async delegate{
+    for (int i = 0; i < 10; i++)
+    {
+        await Task.Delay(100);
+        await c.Writer.WriteAsync(i);
+    }
+
+    c.Writer.Complete();
+});
+
+await foreach(var i in c.Reader.ReadAllAsync())
+{
+    Console.WriteLine(i);
+}
 
 #endregion
 
