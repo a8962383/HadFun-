@@ -905,25 +905,53 @@ using System.Threading.Channels;
 
 #region Channel
 
-var c = Channel.CreateBounded<int>(1); 
+//var c = Channel.CreateBounded<int>(1);
 
-_ = Task.Run(async delegate{
-    for (int i = 0; i < 10; i++)
-    {
-        await Task.Delay(100);
-        await c.Writer.WriteAsync(i);
-    }
+//_ = Task.Run(async delegate
+//{
+//    for (int i = 0; i < 10; i++)
+//    {
+//        await Task.Delay(100);
+//        await c.Writer.WriteAsync(i);
+//    }
 
-    c.Writer.Complete();
-});
+//    c.Writer.Complete();
+//});
 
-await foreach(var i in c.Reader.ReadAllAsync())
-{
-    Console.WriteLine(i);
-}
+//await foreach (var i in c.Reader.ReadAllAsync())
+//{
+//    Console.WriteLine(i);
+//}
 
 #endregion
 
-#region Random test
+#region Pattern matching on ITuple
+
+//Version 0
+object v0 = new Vehicle();
+if (v0 is (string brand0, int year0))
+{
+    Console.WriteLine($"Brand: {brand0}, Manufactured in: {year0}");
+}
+
+//Version 1
+object v1 = new Vehicle();
+if (v1 is var (brand1, year1))
+{
+    Console.WriteLine($"Brand: {brand1}, Manufactured in: {year1}");
+    System.Console.WriteLine(year1.GetType().Name);
+}
+
+class Vehicle : System.Runtime.CompilerServices.ITuple
+{
+    public object? this[int index] => index switch
+    {
+        0 => "VW",
+        1 => 2022,
+        _ => null
+    };
+
+    public int Length => 2;
+}
 
 #endregion
