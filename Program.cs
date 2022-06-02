@@ -927,31 +927,53 @@ using System.Threading.Channels;
 
 #region Pattern matching on ITuple
 
-//Version 0
-object v0 = new Vehicle();
-if (v0 is (string brand0, int year0))
+// //Version 0
+// object v0 = new Vehicle();
+// if (v0 is (string brand0, int year0))
+// {
+//     Console.WriteLine($"Brand: {brand0}, Manufactured in: {year0}");
+// }
+
+// //Version 1
+// object v1 = new Vehicle();
+// if (v1 is var (brand1, year1))
+// {
+//     Console.WriteLine($"Brand: {brand1}, Manufactured in: {year1}");
+//     System.Console.WriteLine(year1.GetType().Name);
+// }
+
+// class Vehicle : System.Runtime.CompilerServices.ITuple
+// {
+//     public object? this[int index] => index switch
+//     {
+//         0 => "VW",
+//         1 => 2022,
+//         _ => null
+//     };
+
+//     public int Length => 2;
+// }
+
+#endregion
+
+#region Random test
+double value = 4999999999999999;
+
+//get all the digits from a decimal number
+var digits = value.ToString("G17", CultureInfo.InvariantCulture).Select(c => int.Parse(c.ToString())).ToArray();
+double result = 0.0;
+for (var i = 0; i < digits.Length; i++)
 {
-    Console.WriteLine($"Brand: {brand0}, Manufactured in: {year0}");
+    result = result + digits[i] * Math.Pow(10, digits.Length - i) / Math.Pow(10, digits.Length + 1);
 }
 
-//Version 1
-object v1 = new Vehicle();
-if (v1 is var (brand1, year1))
+Console.WriteLine(0.4999999999999999);
+
+var tempResult = result.ToString("G17", CultureInfo.InvariantCulture);
+if (tempResult.Length > 18)
 {
-    Console.WriteLine($"Brand: {brand1}, Manufactured in: {year1}");
-    System.Console.WriteLine(year1.GetType().Name);
+    var lastDigit = Convert.ToInt32(tempResult.Substring(18)) / Math.Pow(10, tempResult.Length - 2);
+    result = result - lastDigit;
 }
-
-class Vehicle : System.Runtime.CompilerServices.ITuple
-{
-    public object? this[int index] => index switch
-    {
-        0 => "VW",
-        1 => 2022,
-        _ => null
-    };
-
-    public int Length => 2;
-}
-
+Console.WriteLine(result);
 #endregion
