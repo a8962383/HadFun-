@@ -956,24 +956,47 @@ using System.Threading.Channels;
 
 #endregion
 
+#region Double parsing
+
+// double value = 4999999999999999;
+
+// //get all the digits from a decimal number
+// var digits = value.ToString("G17", CultureInfo.InvariantCulture).Select(c => int.Parse(c.ToString())).ToArray();
+// double result = 0.0;
+// for (var i = 0; i < digits.Length; i++)
+// {
+//     result = result + digits[i] * Math.Pow(10, digits.Length - i) / Math.Pow(10, digits.Length + 1);
+// }
+
+// Console.WriteLine(0.4999999999999999);
+
+// var tempResult = result.ToString("G17", CultureInfo.InvariantCulture);
+// if (tempResult.Length > 18)
+// {
+//     var lastDigit = Convert.ToInt32(tempResult.Substring(18)) / Math.Pow(10, tempResult.Length - 2);
+//     result = result - lastDigit;
+// }
+// Console.WriteLine(result);
+
+#endregion
+
 #region Random test
-double value = 4999999999999999;
 
-//get all the digits from a decimal number
-var digits = value.ToString("G17", CultureInfo.InvariantCulture).Select(c => int.Parse(c.ToString())).ToArray();
-double result = 0.0;
-for (var i = 0; i < digits.Length; i++)
+Test a = new Test() { Num = 1, Str = "Hi" };
+Test b = new Test() { Num = 1, Str = "Hi" };
+
+Console.WriteLine(a == b);
+Console.WriteLine(a.Equals(b));
+
+class Test
 {
-    result = result + digits[i] * Math.Pow(10, digits.Length - i) / Math.Pow(10, digits.Length + 1);
-}
+    public int Num { get; set; }
+    public string Str { get; set; }
 
-Console.WriteLine(0.4999999999999999);
-
-var tempResult = result.ToString("G17", CultureInfo.InvariantCulture);
-if (tempResult.Length > 18)
-{
-    var lastDigit = Convert.ToInt32(tempResult.Substring(18)) / Math.Pow(10, tempResult.Length - 2);
-    result = result - lastDigit;
+    public bool Equals(Test other)
+    {
+        // return Num == other.Num && Str == other.Str;
+        return Num.GetHashCode() == other.Num.GetHashCode() && Str.GetHashCode() == other.Str.GetHashCode();;        
+    }
 }
-Console.WriteLine(result);
 #endregion
