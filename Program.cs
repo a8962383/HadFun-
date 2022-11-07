@@ -21,6 +21,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Channels;
 
@@ -980,23 +981,22 @@ using System.Threading.Channels;
 
 #endregion
 
+#region YouTube blocklist
+
+HttpClient client = new HttpClient();
+var content = await client.GetStringAsync("https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/youtubelist.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/crowed_list.txt");
+
+var sb = new StringBuilder();
+foreach (var item in content.Split('\n'))
+{
+    if (!string.IsNullOrEmpty(item))
+        sb.AppendLine(string.Format("||{0}^", item.Trim()));
+}
+await File.WriteAllTextAsync("Blocklist.txt", sb.ToString());
+
+#endregion
+
 #region Random test
 
-Test a = new Test() { Num = 1, Str = "Hi" };
-Test b = new Test() { Num = 1, Str = "Hi" };
-
-Console.WriteLine(a == b);
-Console.WriteLine(a.Equals(b));
-
-class Test
-{
-    public int Num { get; set; }
-    public string Str { get; set; }
-
-    public bool Equals(Test other)
-    {
-        // return Num == other.Num && Str == other.Str;
-        return Num.GetHashCode() == other.Num.GetHashCode() && Str.GetHashCode() == other.Str.GetHashCode();;        
-    }
-}
 #endregion
