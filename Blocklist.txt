@@ -23212,3 +23212,13 @@
 ||rr3---sn-4g5edndr.googlevideo.com^$important
 ||rr5---sn-4g5ednly.googlevideo.com^$important
 ||rr4---sn-4g5lzner.googlevideo.com^$important
+||rr1---sn-4g5edndz.googlevideo.com^$important
+||rr1---sn-4g5edndk.googlevideo.com^$important
+||rr2---sn-f5f7lnl6.googlevideo.com^$important
+||rr3---sn-4g5e6nsd.googlevideo.com^$important
+||rr4---sn-4g5ednse.googlevideo.com^$important
+||rr3---sn-4g5lzner.googlevideo.com^$important
+||rr4---sn-4g5lznl7.googlevideo.com^$important
+||rr5---sn-4g5lznls.googlevideo.com^$important
+||rr2---sn-4g5e6nzz.googlevideo.com^$important
+||rr1---sn-4g5e6nsz.googlevideo.com^$important
