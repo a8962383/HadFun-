@@ -23249,6 +23249,15 @@
 ||rr2---sn-5hne6n6e.googlevideo.com^$important
 ||rr5---sn-5hne6nzy.googlevideo.com^$important
 ||rr3---sn-5hne6nsr.googlevideo.com^$important
+||rr3---sn-5hne6n6l.googlevideo.com^$important
+||rr5---sn-5hne6n6e.googlevideo.com^$important
+||rr2---sn-5hnekn7s.googlevideo.com^$important
+||rr5---sn-5hneknes.googlevideo.com^$important
+||rr2---sn-5hne6nzs.googlevideo.com^$important
+||r2---sn-5hnednss.googlevideo.com^$important
+||rr3---sn-4g5e6ns7.googlevideo.com^$important
+||rr2---sn-4g5e6nsk.googlevideo.com^$important
+||rr1---sn-f5f7kn7z.googlevideo.com^$important
 ||https://googleads.g.doubleclick.net^$important
 ||https://www.youtube.com/pagead^$important
 ||https://static.doubleclick.net/instream/ad_status.js^$important
