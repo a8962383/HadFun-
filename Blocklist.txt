@@ -23258,6 +23258,10 @@
 ||rr3---sn-4g5e6ns7.googlevideo.com^$important
 ||rr2---sn-4g5e6nsk.googlevideo.com^$important
 ||rr1---sn-f5f7kn7z.googlevideo.com^$important
+||rr1---sn-f5f7kn7e.googlevideo.com^$important
+||rr2---sn-4g5edns7.googlevideo.com^$important
+||rr5---sn-4g5e6nze.googlevideo.com^$important
+||rr3---sn-f5f7kn7z.googlevideo.com^$important
 ||https://googleads.g.doubleclick.net^$important
 ||https://www.youtube.com/pagead^$important
 ||https://static.doubleclick.net/instream/ad_status.js^$important
