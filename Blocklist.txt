@@ -23288,3 +23288,7 @@
 ||lh3.googleusercontent.com^$important
 ||fonts.gstatic.com^$important
 ||oca.nflxvideo.net^$important
+@@||api.accuweather.com^$important
+@@||nflxvideo.net^$important
+@@||api-global.netflix.com^$important
+@@||clients1.google.com^$important
