@@ -23278,6 +23278,7 @@
 ||rr2---sn-4g5e6nzl.googlevideo.com^$important
 ||rr4---sn-4g5e6nsz.googlevideo.com^$important
 ||rr1---sn-4g5edndd.googlevideo.com^$important
+||rr4---sn-4g5edn6k.googlevideo.com^$important
 ||https://googleads.g.doubleclick.net^$important
 ||https://www.youtube.com/pagead^$important
 ||https://static.doubleclick.net/instream/ad_status.js^$important
