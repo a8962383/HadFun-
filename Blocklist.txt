@@ -23295,7 +23295,6 @@
 ||rr3---sn-4g5e6nzz.googlevideo.com^$important
 ||rr2---sn-f5f7lnee.googlevideo.com^$important
 ||rr3---sn-4g5ednsd.googlevideo.com^$important
-
 ^ad([sxv]?[0-9]*|system)[_.-]([^.[:space:]]+\.){1,}|[_.-]ad([sxv]?[0-9]*|system)[_.-]
 ^(.+[_.-])?adse?rv(er?|ice)?s?[0-9]*[_.-]
 ^(.+[_.-])?telemetry[_.-]
@@ -23349,7 +23348,9 @@
 ||discovery.meethue.com^$important
 ||lh3.googleusercontent.com^$important
 ||fonts.gstatic.com^$important
-||oca.nflxvideo.net^$important
 ||www.gstatic.com^$important
 ||www.google.de^$important
 ||www.google.com^$important
+@@||api.accuweather.com^$important
+@@||nflxvideo.net^$important
+@@||api-global.netflix.com^$important
