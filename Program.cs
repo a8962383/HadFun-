@@ -983,9 +983,27 @@ using System.Threading.Channels;
 
 #region YouTube blocklist
 
-HttpClient client = new HttpClient();
-var content = await client.GetStringAsync("https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/youtubelist.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/crowed_list.txt");
+Stopwatch watch = new();
+watch.Start();
+HttpClient client = new();
+
+var content = await client.GetStringAsync("https://easylist.to/easylist/easylist.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-cookies.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-others.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/badware.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2020.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2021.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2022.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2023.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2024.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2025.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-mobile.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/privacy.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/quick-fixes.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/resource-abuse.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/ubo-link-shorteners.txt");
+content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/unbreak.txt");
 
 var sb = new StringBuilder();
 foreach (var item in content.Split('\n'))
@@ -994,6 +1012,9 @@ foreach (var item in content.Split('\n'))
         sb.AppendLine(string.Format("||{0}^", item.Trim()));
 }
 await File.WriteAllTextAsync("Blocklist.txt", sb.ToString());
+
+watch.Start();
+Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds / 1000 + " seconds");
 
 #endregion
 
