@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Channels;
+using System.Runtime.InteropServices;
 
 #region Proxy server
 // object[] inputArray = new object[10];
@@ -983,39 +984,87 @@ using System.Threading.Channels;
 
 #region YouTube blocklist
 
-Stopwatch watch = new();
-watch.Start();
-HttpClient client = new();
+// Stopwatch watch = new();
+// watch.Start();
+// HttpClient client = new();
 
-var content = await client.GetStringAsync("https://easylist.to/easylist/easylist.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-cookies.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-others.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/badware.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2020.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2021.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2022.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2023.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2024.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2025.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-mobile.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/privacy.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/quick-fixes.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/resource-abuse.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/ubo-link-shorteners.txt");
-content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/unbreak.txt");
+// var content = await client.GetStringAsync("https://easylist.to/easylist/easylist.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-cookies.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/annoyances-others.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/badware.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2020.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2021.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2022.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2023.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2024.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-2025.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters-mobile.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/filters.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/privacy.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/quick-fixes.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/resource-abuse.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/ubo-link-shorteners.txt");
+// content += await client.GetStringAsync("https://raw.githubusercontent.com/uBlockOrigin/uAssets/refs/heads/master/filters/unbreak.txt");
 
-var sb = new StringBuilder();
-foreach (var item in content.Split('\n'))
-{
-    if (!string.IsNullOrEmpty(item))
-        sb.AppendLine(string.Format("||{0}^", item.Trim()));
-}
-await File.WriteAllTextAsync("Blocklist.txt", sb.ToString());
+// var sb = new StringBuilder();
+// foreach (var item in content.Split('\n'))
+// {
+//     if (!string.IsNullOrEmpty(item))
+//         sb.AppendLine(string.Format("||{0}^", item.Trim()));
+// }
+// await File.WriteAllTextAsync("Blocklist.txt", sb.ToString());
 
-watch.Start();
-Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds / 1000 + " seconds");
+// watch.Start();
+// Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds / 1000 + " seconds");
 
+#endregion
+
+#region for vs foreach vs LINQ performance test
+// Random _random = new(80085);
+// List<int> numbers = Enumerable.Range(1, 1_000_000_000).Select(i => _random.Next()).ToList();
+// Stopwatch watch = new();
+// for (int ci = 0; ci < 2; ci++)
+// {
+//     watch.Start();
+//     for (int i = 0; i < numbers.Count; i++)
+//     {
+//         var item = numbers[i];
+//     }
+//     watch.Stop();
+//     Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds + " ms => for loop.");
+
+//     watch.Restart();
+//     foreach (var item in numbers)
+//     {
+//         var i = item;
+//     }
+//     watch.Stop();
+//     Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds + " ms => foreach loop.");
+
+//     watch.Restart();
+//     Parallel.For(0, numbers.Count, i =>
+//     {
+//         var item = numbers[i];
+//     });
+//     watch.Stop();
+//     Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds + " ms => Parallel.For loop.");
+
+//     watch.Restart();
+//     Parallel.ForEach(numbers, item =>
+//     {
+//         var i = item;
+//     });
+//     watch.Stop();
+//     Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds + " ms => Parallel.ForEach loop.");
+
+//     watch.Restart();
+//     foreach (var item in CollectionsMarshal.AsSpan(numbers))
+//     {
+//         var i = item;
+//     }
+//     watch.Stop();
+//     Console.WriteLine("Elapsed time: " + watch.ElapsedMilliseconds + " ms => foreach(span) loop.");
+// }
 #endregion
 
 #region Random test
