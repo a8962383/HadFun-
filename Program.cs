@@ -1069,4 +1069,7 @@ using System.Runtime.InteropServices;
 
 #region Random test
 
+var hadFun = File.ReadAllText("README.md");
+Console.WriteLine(hadFun);
+
 #endregion
