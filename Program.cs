@@ -1,4 +1,43 @@
-﻿using System;
+﻿// =============================================================================
+// HadFun- :: Program.cs
+// =============================================================================
+//
+// Entry point for the HadFun- experimentation sandbox. This file contains ~20
+// self-contained code experiments organized into #region blocks. All experiments
+// are commented out except "Random test" at the bottom, which simply prints the
+// README.md ASCII art.
+//
+// To run a specific experiment, uncomment its region and comment out the others.
+//
+// Experiments included:
+//   - Proxy server              : HTTP reverse proxy via ProxyServer class
+//   - Jason Bourne              : JSON manipulation (JObject, JSONPath, LINQ)
+//   - Beauty of C# 9.0          : Records, 'with' expressions, value equality
+//   - Json Validation           : JSON Schema validation (Newtonsoft.Json.Schema)
+//   - Encryption                : AES encrypt/decrypt round-trip
+//   - Records in C# 9.0         : record vs class, IPerson interface
+//   - Hack into private vars    : Reflection with BindingFlags.NonPublic
+//   - String immutability       : Reference-type vs value-type semantics
+//   - Parallelism + Concurrency : Sequential vs AsParallel() benchmarking
+//   - CancellationToken         : Async HTTP with cancellation
+//   - Sleep sort                : Novelty sorting via Thread.Sleep
+//   - Design Patterns           : Memento, Builder
+//   - Events & delegates        : Custom event/delegate pattern
+//   - GitHub Copilot fun        : AI-generated Person class & utilities
+//   - Drive free space           : ConcurrentDictionary + Parallel.For + DriveInfo
+//   - LINQ performance          : FirstOrDefault vs Where().FirstOrDefault()
+//   - Memory address            : Unsafe __makeref pointer dereferencing
+//   - ConcurrentQueue extension : ClearByItem<T> extension method
+//   - Regex vs MailAddress      : Email validation performance comparison
+//   - Channel                   : Bounded channel producer/consumer
+//   - Pattern matching ITuple   : Custom ITuple + positional patterns
+//   - Double parsing            : Floating-point precision exploration
+//   - YouTube blocklist         : Ad-block filter list downloader/merger
+//   - Loop performance          : for / foreach / Parallel / Span benchmarks
+//   - Random test (ACTIVE)      : Reads and prints README.md
+// =============================================================================
+
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -27,6 +66,10 @@ using System.Threading.Channels;
 using System.Runtime.InteropServices;
 
 #region Proxy server
+// Demonstrates the ProxyServer class — starts a local HTTP reverse proxy
+// that forwards all requests to Google and rewrites host references in
+// HTML/JSON responses so the browser routes through the proxy.
+//
 // object[] inputArray = new object[10];
 // string[] resultArray = Array.ConvertAll(inputArray, x => x.ToString());
 
@@ -45,6 +88,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Jason Bourne
+// Explores Newtonsoft.Json JObject/JArray manipulation, JSONPath queries,
+// and LINQ-to-JSON for navigating and mutating a layout.json structure.
+//
 // dynamic jObj = JObject.Parse(File.ReadAllText("layout.json"));
 // JArray layoutArray = (JArray)jObj.Layout;
 // dynamic layout = (JObject)layoutArray.First;
@@ -69,7 +115,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Beauty of C# 9.0
-
+// Demonstrates C# 9 record types, the 'with' expression for non-destructive
+// mutation, and value-based equality semantics.
+//
 // var p1 = new PersonRecord("MD", "RN");
 // var p2 = p1 with { FirstName = "Paul" }; //this is crazy
 // var p3 = p1 with { FirstName = "MD" }; //this is crazy
@@ -87,6 +135,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Json Validation
+// Generates a JSON Schema from a C# type, validates JObjects against it,
+// and performs deep-equality comparison with JToken.DeepEquals.
+// NOTE: Requires the separate Newtonsoft.Json.Schema NuGet package.
+//
 // JsonSchemaGenerator generator = new JsonSchemaGenerator();
 
 // JsonSchema schema = generator.Generate(typeof(Person));
@@ -116,7 +168,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Encryption
-
+// AES symmetric encryption round-trip: encrypts a plaintext string into
+// a byte array, then decrypts it back. Uses a 16-byte key derived from
+// the plaintext itself (for demonstration only — not a secure practice).
+//
 // string original = "Everything else is Schnullibulli!";
 // byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
 // byte[] codexKey = Encoding.ASCII.GetBytes("Everything else is Schnullibulli!", 0, 16);
@@ -224,6 +279,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Records in C# 9.0
+// Compares positional record declarations with traditional class-based
+// implementations of a Person type, highlighting value equality behavior.
+//
 // public record PersonRecord(string FirstName, string LastName);
 // public interface IPerson
 // {
@@ -245,7 +303,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Hack into private variables
-
+// Uses System.Reflection to access private fields (BindingFlags.NonPublic)
+// on an object instance, demonstrating that encapsulation is a compile-time
+// guarantee, not a runtime one.
+//
 // var myInstance = new MyClass();
 // var fieldInfo = typeof(MyClass).GetField("_secret", BindingFlags.NonPublic | BindingFlags.Instance);
 // var secret = fieldInfo.GetValue(myInstance);
@@ -262,8 +323,11 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-#region string is reference type but it's immutable 
-
+#region string is reference type but it's immutable
+// Illustrates that while string is a reference type, its immutability means
+// reassignment doesn't affect other references. Contrasts with a mutable
+// class and a C# 9 record using the 'with' expression.
+//
 // string str = "str";
 // string str1 = str + "_str1";
 // str = string.Empty;
@@ -293,6 +357,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Game of Parallelism + Concurrency
+// Benchmarks sequential Sum() vs PLINQ AsParallel().Sum() over a short.MaxValue
+// range, measuring per-iteration nanosecond cost with Stopwatch.
+//
 // int[] array = Enumerable.Range(0, short.MaxValue).ToArray();
 
 // Console.WriteLine("Seq. sum: " + array.Sum());
@@ -313,7 +380,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Game of Concurrency with CancellationToken
-
+// Simulates a UI thread making async HTTP calls with a CancellationTokenSource
+// that cancels after 2 seconds, demonstrating cooperative cancellation and
+// the interaction between UI responsiveness and background tasks.
+//
 // "Calling Facebook Code.".Dump();
 // "UI thread is free now...".Dump();
 // int uiCallCounter = 0;
@@ -383,7 +453,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Sleep sort
-
+// A joke sorting algorithm: each number sleeps for n*10ms, then prints.
+// Numbers naturally appear in ascending order (assuming no scheduling jitter).
+//
 // var input = new[] { 1, 9, 2, 1, 3, 10, 83, 65, 23 };
 
 // foreach (var n in input)
@@ -399,12 +471,16 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-#region Design Patters
+#region Design Patterns
 
 #region Behavioral Patterns
 
 #region Memento
-
+// Implements the Memento behavioral design pattern:
+//   - Editor (Originator) — holds mutable state and can save/restore snapshots.
+//   - LastEditorState (Memento) — immutable snapshot of editor state.
+//   - StateContainer (Caretaker) — stores the last saved memento.
+//
 // Editor editor = new Editor();
 // editor.Text = "1";
 
@@ -489,7 +565,12 @@ using System.Runtime.InteropServices;
 #region Creational Patterns
 
 #region Builder
-
+// Implements the Builder creational design pattern:
+//   - Director — orchestrates the construction steps.
+//   - Builder (abstract) — defines the interface for building parts.
+//   - ConcreteBuilder1/2 — produce different product configurations.
+//   - Product — the assembled result.
+//
 // // Create director and builders
 // Director director = new Director();
 
@@ -603,6 +684,11 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Events & delegates
+// Demonstrates the C# event/delegate pattern:
+//   1. VideoDownloader defines a delegate and event.
+//   2. EmailService subscribes to the event.
+//   3. When a video finishes downloading, the event fires and EmailService reacts.
+//
 // var video = new Video() { Title = "Mission Impossible 1", Uri = "https://code.jquery.com/git/jquery-git.slim.min.js" };
 // var videoDownloader = new VideoDownloader();
 
@@ -651,6 +737,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region GitHub Copilot fun
+// Code generated entirely by GitHub Copilot from comment prompts.
+// Includes: Person CRUD helpers, prime check, complex-number identification
+// (logically incorrect), and tongue-in-cheek framework opinions.
+//
 // // Person class with name, age, and email
 // public class Person
 // {
@@ -744,7 +834,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Check total free space of fixed drive in multi-threaded application
-
+// Writes to a file on a background task while Parallel.For polls DriveInfo
+// for total free space, recording timestamp→freeSpace pairs in a
+// ConcurrentDictionary. Shows free space decreasing as writes accumulate.
+//
 // string path = @"MyTest.txt";
 // Stopwatch watch = new Stopwatch();
 // watch.Start();
@@ -791,7 +884,11 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Linq performance
-
+// Benchmarks LINQ method chaining approaches on a 1-billion-element list:
+//   - FirstOrDefault(predicate) vs Where(...).FirstOrDefault()
+//   - Count(predicate) vs Where(...).Count()
+//   - Max(predicate) vs Where(...).Max()
+//
 // var numberList = Enumerable.Range(1, 1000000000).ToList();
 // var i = new Random().Next(1, 1000000000);
 // Stopwatch sw = new Stopwatch();
@@ -829,7 +926,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Get memory address of an object
-
+// Uses unsafe code with __makeref and pointer dereferencing to obtain
+// the raw memory address of a managed object on the heap.
+// Requires <AllowUnsafeBlocks>true</AllowUnsafeBlocks> in the project file.
+//
 // object o = new object();
 // TypedReference tr = __makeref(o);
 // unsafe
@@ -841,7 +941,11 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region ConcurrentQueue.ClearByItem extension method
-
+// Adds a ClearByItem<T> extension method to ConcurrentQueue<T> that
+// removes a specific item by dequeuing all elements, re-enqueuing
+// everything except the target. Uses lock() for atomicity (though this
+// undermines the lock-free nature of ConcurrentQueue).
+//
 // var cq = new ConcurrentQueue<int>();
 
 // cq.Enqueue(1);
@@ -888,7 +992,9 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Regex vs MailAddress.TryCreate
-
+// Performance comparison: validates an email address 1 million times using
+// a Regex pattern versus the built-in MailAddress.TryCreate method.
+//
 // var emailAdrress = "a@b.com";
 // Regex oldRegex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
 // Stopwatch sw = new();
@@ -906,7 +1012,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Channel
-
+// Demonstrates System.Threading.Channels: a bounded channel with capacity 1
+// that enforces backpressure. A producer writes 10 items with delay, a
+// consumer reads them via 'await foreach'.
+//
 //var c = Channel.CreateBounded<int>(1);
 
 //_ = Task.Run(async delegate
@@ -928,7 +1037,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Pattern matching on ITuple
-
+// Implements the System.Runtime.CompilerServices.ITuple interface on a
+// Vehicle class, enabling positional deconstruction via pattern matching
+// (e.g., 'if (v is (string brand, int year))').
+//
 // //Version 0
 // object v0 = new Vehicle();
 // if (v0 is (string brand0, int year0))
@@ -959,7 +1071,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Double parsing
-
+// Explores IEEE 754 double-precision floating-point representation quirks.
+// Reconstructs 0.4999999999999999 from its digit decomposition and shows
+// how trailing precision digits can accumulate rounding errors.
+//
 // double value = 4999999999999999;
 
 // //get all the digits from a decimal number
@@ -983,7 +1098,10 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region YouTube blocklist
-
+// Downloads 17 ad-blocking filter lists from EasyList and uBlock Origin,
+// merges them into Adblock-Plus-compatible format (||rule^), and writes
+// the combined output to Blocklist.txt (~115K lines).
+//
 // Stopwatch watch = new();
 // watch.Start();
 // HttpClient client = new();
@@ -1020,6 +1138,14 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region for vs foreach vs LINQ performance test
+// Benchmarks five iteration strategies over a 1-billion-element List<int>:
+//   1. for loop (indexed access)
+//   2. foreach loop (IEnumerator)
+//   3. Parallel.For
+//   4. Parallel.ForEach
+//   5. foreach over CollectionsMarshal.AsSpan (zero-copy Span<T>)
+// Runs two warm-up iterations to observe JIT effects.
+//
 // Random _random = new(80085);
 // List<int> numbers = Enumerable.Range(1, 1_000_000_000).Select(i => _random.Next()).ToList();
 // Stopwatch watch = new();
@@ -1068,6 +1194,7 @@ using System.Runtime.InteropServices;
 #endregion
 
 #region Random test
+// The only active experiment: reads and prints the README.md ASCII art.
 
 var hadFun = File.ReadAllText("README.md");
 Console.WriteLine(hadFun);
